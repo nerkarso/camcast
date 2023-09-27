@@ -4,12 +4,18 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+const appInfo = {
+  appName: process.env.APP_NAME,
+  appDescription: process.env.APP_DESCRIPTION,
+  appOgImage: process.env.APP_OG_IMAGE,
+};
+
 app.get('/', (req, res) => {
-  res.render('index', { isCaster: false });
+  res.render('index', { isCaster: false, ...appInfo });
 });
 
 app.get('/cast', (req, res) => {
-  res.render('index', { isCaster: true });
+  res.render('index', { isCaster: true, ...appInfo });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 5000);
