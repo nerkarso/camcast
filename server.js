@@ -10,6 +10,8 @@ const appInfo = {
   appOgImage: process.env.APP_OG_IMAGE,
 };
 
+console.log(appInfo);
+
 app.get('/', (req, res) => {
   res.render('index', { isCaster: false, ...appInfo });
 });
