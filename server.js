@@ -6,11 +6,9 @@ app.use(express.static('public'));
 
 const appInfo = {
   appName: process.env.APP_NAME,
-  appDescription: process.env.APP_DESCRIPTION,
+  appDescription: (process.env.APP_DESCRIPTION || '').replace(/'/g, ''),
   appOgImage: process.env.APP_OG_IMAGE,
 };
-
-console.log(appInfo);
 
 app.get('/', (req, res) => {
   res.render('index', { isCaster: false, ...appInfo });
