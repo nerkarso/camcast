@@ -3,12 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      const ROOM_ID = '<%= roomId %>';
-    </script>
-    <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="script.js" defer></script>
     <title>Camcast</title>
     <style>
       html,
@@ -16,6 +10,7 @@
         margin: 0;
         height: 100%;
         position: relative;
+        font-family: system-ui;
       }
       video {
         width: 100%;
@@ -23,15 +18,31 @@
         object-fit: cover;
         object-position: center;
       }
-      #user-video {
+      #cast {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
       }
+      #overlay {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        color: #fff;
+        display: grid;
+        place-items: center;
+      }
     </style>
   </head>
   <body>
-    <div id="video-grid"></div>
+    <div id="overlay">Buffering...</div>
+    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+    <script>
+      const IS_CASTER = JSON.parse('<%= isCaster %>');
+      const IS_RECEIVER = !IS_CASTER;
+    </script>
+    <script src="/script.js"></script>
   </body>
 </html>
